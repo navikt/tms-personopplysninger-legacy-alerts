@@ -45,7 +45,7 @@ spec:
           labels:
             namespace: min-side
             severity: warning
-    - name: arbeidsforhold-api-alert
+    - name: arbeidsforhold-api-legacy-alert
       rules:
         - alert: applikasjon nede
           expr: kube_deployment_status_replicas_available{deployment="arbeidsforhold-api", namespace="personbruker"} == 0
