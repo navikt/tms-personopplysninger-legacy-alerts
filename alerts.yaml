@@ -1,16 +1,16 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: personopplysninger-api-alert
+  name: personopplysninger-api-legacy-alert
   namespace: min-side
   labels:
     team: min-side
 spec:
   groups:
-    - name: personopplysninger-api-alert
+    - name: personopplysninger-api-legacy-alert
       rules:
         - alert: applikasjon nede
-          expr: kube_deployment_status_replicas_available{deployment="personopplysninger-api"} == 0
+          expr: kube_deployment_status_replicas_available{deployment="personopplysninger-api", namespace="personbruker"} == 0
           for: 2m
           annotations:
             summary: "App personopplysninger-api er nede"
@@ -19,7 +19,7 @@ spec:
             severity: danger
             alert_type: custom
         - alert: høy feilrate i logger
-          expr: (100 * sum by (log_app, log_namespace) (rate(log_messages_errors{app="personopplysninger-api",level=~"Warning|Error"}[3m])) / sum by (log_app, log_namespace) (rate(log_messages_total{app="personopplysninger-api"}[3m]))) > 10
+          expr: (100 * sum by (log_app, log_namespace) (rate(log_messages_errors{app="personopplysninger-api",namespace="personbruker",level=~"Warning|Error"}[3m])) / sum by (log_app, log_namespace) (rate(log_messages_total{namespace="personbruker", app="personopplysninger-api"}[3m]))) > 10
           for: 3m
           annotations:
             summary: "App personopplysninger-api har høy feilrate i logger"
