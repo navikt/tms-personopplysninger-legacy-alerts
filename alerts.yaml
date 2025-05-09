@@ -7,7 +7,7 @@ metadata:
     team: min-side
 spec:
   groups:
-    - name: personopplysninger-api-legacy-alert
+    - name: min-side-personopplysninger-api-alert
       rules:
         - alert: applikasjon nede
           expr: kube_deployment_status_replicas_available{deployment="personopplysninger-api", namespace="personbruker"} == 0
@@ -45,7 +45,7 @@ spec:
           labels:
             namespace: min-side
             severity: warning
-    - name: arbeidsforhold-api-legacy-alert
+    - name: min-side-arbeidsforhold-api-alert
       rules:
         - alert: applikasjon nede
           expr: kube_deployment_status_replicas_available{deployment="arbeidsforhold-api", namespace="personbruker"} == 0
@@ -84,7 +84,7 @@ spec:
           labels:
             severity: warning
             namespace: min-side
-    - name: dsop-api-legacy-alert
+    - name: min-side-dsop-api-alert
       rules:
         - alert: applikasjon nede
           expr: kube_deployment_status_replicas_available{deployment="dsop-api", namespace="personbruker"} == 0
