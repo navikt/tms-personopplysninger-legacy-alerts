@@ -45,21 +45,3 @@ spec:
           labels:
             namespace: min-side
             severity: warning
-        - alert: Test alert til min side fra personopplysninger-api
-          expr: vector(1)
-          for: 3m
-          annotations:
-            summary: "Test alert fra personopplysninger-api til Min side"
-            action: "test "
-          labels:
-            namespace: min-side
-            severity: info
-        - alert: Test alert til min side fra personopplysninger-api med ekte query.
-          expr: (100 * (sum by (backend) (rate(ktor_http_server_requests_seconds_count {status=~"^2\\d\\d", namespace="personbruker", app="personopplysninger-api"}[3m])) / sum by (backend) (rate(ktor_http_server_requests_seconds_count {namespace="personbruker", app="personopplysninger-api"}[3m])))) > 10
-          for: 3m
-          annotations:
-            summary: "Test alert fra personopplysninger-api til Min side"
-            action: "test "
-          labels:
-            namespace: min-side
-            severity: warning
